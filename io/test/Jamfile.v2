@@ -9,10 +9,16 @@
 # bring in rules for testing
 import testing ;
 
-using jpeg 	    : 	 8b : C:/chhenning/jpeg/jpeg-8c ;
-using zlib      : 1.2.5 : C:/chhenning/zlib/zlib-1.2.5 ;
-using png       : 1.4.4 : C:/chhenning/png/lpng154 ;
-using libtiff   : 3.9.4 : C:/chhenning/tiff/tiff-4.0.1 ;
+jpeg-prefix = [ modules.peek : jpeg-prefix ] ;
+png-prefix = [ modules.peek : png-prefix ] ;
+tiff-prefix = [ modules.peek : tiff-prefix ] ;
+# libpng uses different names on different platforms, so we need to parametrize it.
+libpng = [ modules.peek : libpng ] ;
+libpng ?= png ;
+
+lib jpeg : : <search>$(jpeg-prefix)/lib : : <include>$(jpeg-prefix)/include ;
+lib png : : <name>$(libpng) <search>$(png-prefix)/lib : : <include>$(png-prefix)/include ;
+lib tiff : : <search>$(tiff-prefix)/lib : : <include>$(tiff-prefix)/include ;
 
 project
     : requirements
@@ -21,7 +27,7 @@ project
         <toolset>msvc-8.0:<define>_SCL_SECURE_NO_DEPRECATE <define>_CRT_SECURE_NO_DEPRECATE <define>_CRT_NONSTDC_NO_DEPRECATE
         <toolset>msvc-9.0:<define>_SCL_SECURE_NO_DEPRECATE <define>_CRT_SECURE_NO_WARNINGS <define>_CRT_NONSTDC_NO_DEPRECATE
         <toolset>msvc-10.0:<define>_SCL_SECURE_NO_DEPRECATE <define>_CRT_SECURE_NO_WARNINGS <define>_CRT_NONSTDC_NO_DEPRECATE
-        <link>static
+        #<link>static
         <library>/boost/test//boost_unit_test_framework
 		<library>/boost/system//boost_system
 		<library>/boost/filesystem//boost_filesystem
@@ -81,11 +87,9 @@ test-suite "gil::io"
         tiff_tiled_rgb_planar_test_21-31_32_64.cpp
         tiff_tiled_test.cpp
         tiff_write_test.cpp
-        /ext/jpeg//jpeg
-        /ext/png//png
-        /ext/libtiff//tiff
-        /ext/libtiff//tiffxx
-        /ext/zlib//z
+	jpeg
+	png
+	tiff
         : # args
         : # input-files
         : # requirements
