@@ -8,7 +8,11 @@
 #ifndef BOOST_GIL_IO_UNIT_TEST_PATHS_HPP
 #define BOOST_GIL_IO_UNIT_TEST_PATHS_HPP
 
-static const std::string base = "C:/boost/libs/gil/io/";
+#include <boost/filesystem/path.hpp>
+
+// `base` holds the path to ../.., i.e. the directory containing `test_images`
+static const std::string base(
+  boost::filesystem::path(__FILE__).parent_path().string() + "/../");
 
 static const std::string bmp_in  = base + "test_images/bmp/";
 static const std::string bmp_out = base + "output/bmp/";
