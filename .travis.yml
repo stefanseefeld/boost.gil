@@ -305,6 +305,8 @@ script:
   - ./b2 libs/gil/test toolset=$TOOLSET
   # The io tests require C++11...
   - if [ $CXXSTD != c++03 ]; then ./b2 libs/gil/io/test toolset=$TOOLSET; fi
+  - ./b2 libs/gil/numeric/test toolset=$TOOLSET
+  - ./b2 libs/gil/toolbox/test toolset=$TOOLSET
 
 notifications:
   email:
