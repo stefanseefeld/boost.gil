@@ -303,7 +303,8 @@ script:
   - |-
     echo "using $TOOLSET : : $COMPILER : <cxxflags>--std=$CXXSTD ;" > ~/user-config.jam
   - ./b2 libs/gil/test toolset=$TOOLSET
-  - ./b2 libs/gil/io/test toolset=$TOOLSET
+  # The io tests require C++11...
+  - if [ $CXXSTD != c++03 ]; then ./b2 libs/gil/io/test toolset=$TOOLSET; fi
 
 notifications:
   email:
