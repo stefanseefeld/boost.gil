@@ -11,9 +11,7 @@
 #include <boost/filesystem/path.hpp>
 
 // `base` holds the path to ../.., i.e. the directory containing `test_images`
-static const std::string base(
-  boost::filesystem::path(__FILE__).parent_path().string() + "/../");
-
+static const std::string base = "D:/boost_io_tests/";
 static const std::string out_base = "D:/boost_io_tests/";
   
 static const std::string bmp_in  = base + "test_images/bmp/";

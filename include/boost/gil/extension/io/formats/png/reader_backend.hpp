@@ -22,7 +22,6 @@
 #include <boost/gil/extension/io/png_tags.hpp>
 
 #include "base.hpp"
-#include <algorithm>
 
 namespace boost { namespace gil {
 
