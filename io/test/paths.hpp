@@ -14,26 +14,28 @@
 static const std::string base(
   boost::filesystem::path(__FILE__).parent_path().string() + "/../");
 
+static const std::string out_base = "D:/boost_io_tests/";
+  
 static const std::string bmp_in  = base + "test_images/bmp/";
-static const std::string bmp_out = base + "output/bmp/";
+static const std::string bmp_out = out_base + "output/bmp/";
 
 static const std::string jpeg_in  = base + "test_images/jpg/";
-static const std::string jpeg_out = base + "output/jpeg/";
+static const std::string jpeg_out = out_base + "output/jpeg/";
 
 static const std::string png_base_in = base + "test_images/png/";
 static const std::string png_in      = png_base_in + "PngSuite/";
-static const std::string png_out     = base + "output/png/";
+static const std::string png_out     = out_base + "output/png/";
 
 static const std::string pnm_in  = base + "test_images/pnm/";
-static const std::string pnm_out = base + "output/pnm/";
+static const std::string pnm_out = out_base + "output/pnm/";
 
 static const std::string raw_in  = base + "test_images/raw/";
 
 static const std::string targa_in  = base + "test_images/targa/";
-static const std::string targa_out = base + "output/targa/";
+static const std::string targa_out = out_base + "output/targa/";
 
 static const std::string tiff_in    = base + "test_images/tiff/";
-static const std::string tiff_out   = base + "output/tiff/";
+static const std::string tiff_out   = out_base + "output/tiff/";
 static const std::string tiff_in_GM = tiff_in + "GraphicsMagick/tiff-sample-images/";
 
 static const std::string bmp_filename  ( bmp_in      + "test.bmp"               );

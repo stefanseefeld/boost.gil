@@ -1,0 +1,93 @@
+diff --git a/io/test/Jamfile.v2 b/io/test/Jamfile.v2
+index f6f4d4a..1cfa633 100644
+--- a/io/test/Jamfile.v2
++++ b/io/test/Jamfile.v2
+@@ -4,21 +4,25 @@
+ # Distributed under the Boost Software License, Version 1.0.
+ # (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ 
+-# Please make sure to read readme.txt!
+-
+ # bring in rules for testing
+ import testing ;
+ 
+ jpeg-prefix = [ modules.peek : jpeg-prefix ] ;
+ png-prefix = [ modules.peek : png-prefix ] ;
+ tiff-prefix = [ modules.peek : tiff-prefix ] ;
++zlib-prefix = [ modules.peek : zlib-prefix ] ;
+ # libpng uses different names on different platforms, so we need to parametrize it.
+ libpng = [ modules.peek : libpng ] ;
+ libpng ?= png ;
++# zlib uses different names on different platforms, so we need to parametrize it.
++chh_zlib = [ modules.peek : zlib ] ;
++
+ 
+ lib jpeg : : <search>$(jpeg-prefix)/lib : : <include>$(jpeg-prefix)/include ;
+ lib png : : <name>$(libpng) <search>$(png-prefix)/lib : : <include>$(png-prefix)/include ;
+ lib tiff : : <search>$(tiff-prefix)/lib : : <include>$(tiff-prefix)/include ;
++lib zlib : : <name>$(chh_zlib) <search>$(zlib-prefix)/lib : : <include>$(zlib-prefix)/include ;
++
+ 
+ project
+     : requirements
+@@ -38,58 +42,11 @@ test-suite "gil::io"
+ 	[ run
+         # sources
+         test.cpp
+-        all_formats_test.cpp
+-        bmp_old_test.cpp
+-        bmp_read_test.cpp
+-        bmp_test.cpp
+-        bmp_write_test.cpp
+-        jpeg_old_test.cpp
+-        jpeg_read_test.cpp
+-        jpeg_test.cpp
+-        jpeg_write_test.cpp
+-        make.cpp
+-        png_file_format_test.cpp
+-        png_old_test.cpp
+-        png_read_test.cpp
+-        png_test.cpp
+-        pnm_old_test.cpp
+-        pnm_read_test.cpp
+-        pnm_test.cpp
+-        pnm_write_test.cpp
+-        #raw_test.cpp
+-        targa_old_test.cpp
+-        targa_read_test.cpp
+-        targa_test.cpp
+-        targa_write_test.cpp
+-        tiff_file_format_test.cpp
+-        tiff_old_test.cpp
+-        tiff_subimage_test.cpp
+-        tiff_test.cpp
+-        tiff_tiled_float_test.cpp
+-        tiff_tiled_minisblack_test_1-10.cpp
+-        tiff_tiled_minisblack_test_11-20.cpp
+-        tiff_tiled_minisblack_test_21-31_32-64.cpp
+-        tiff_tiled_minisblack_write_test_1-10.cpp
+-        tiff_tiled_minisblack_write_test_11-20.cpp
+-        tiff_tiled_minisblack_write_test_21-31_32-64.cpp
+-        tiff_tiled_palette_test_1-8.cpp
+-        tiff_tiled_palette_test_8-16.cpp
+-        tiff_tiled_palette_write_test_1-8.cpp
+-        tiff_tiled_palette_write_test_8-16.cpp
+-        tiff_tiled_rgb_contig_test_1-10.cpp
+-        tiff_tiled_rgb_contig_test_11-20.cpp
+-        tiff_tiled_rgb_contig_test_21-31_32_64.cpp
+-        tiff_tiled_rgb_contig_write_test_1-10.cpp
+-        tiff_tiled_rgb_contig_write_test_11-20.cpp
+-        tiff_tiled_rgb_contig_write_test_21-31_32_64.cpp
+-        tiff_tiled_rgb_planar_test_1-10.cpp
+-        tiff_tiled_rgb_planar_test_11-20.cpp
+-        tiff_tiled_rgb_planar_test_21-31_32_64.cpp
+-        tiff_tiled_test.cpp
+-        tiff_write_test.cpp
++        chh_test.cpp
+ 	jpeg
+ 	png
+ 	tiff
++    zlib
+         : # args
+         : # input-files
+         : # requirements
