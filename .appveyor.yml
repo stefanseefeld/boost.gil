@@ -27,6 +27,8 @@ test_script:
   - set PATH=%ADDPATH%%PATH%
   - |-
     set VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%
-    set CHUNK="^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib"
-    echo %CHUNK% > config.jam
+    echo using zlib : : ^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib ; > config.jam
+    echo using libjpeg : : ^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib ; >> config.jam
+    echo using libpng : : ^<name^>libpng16 ^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib ; >> config.jam
+    echo using libtiff : : ^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib ; >> config.jam
     more config.jam
