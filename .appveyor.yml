@@ -28,5 +28,5 @@ test_script:
   - |-
     set VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%
     set "CHUNK=^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib"
-    echo hello world > config.jam
+    echo %CHUNK% > config.jam
     more config.jam
