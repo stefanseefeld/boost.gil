@@ -27,6 +27,6 @@ test_script:
   - set PATH=%ADDPATH%%PATH%
   - |-
     set VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%
-    set "CHUNK=^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib"
+    set CHUNK="^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib"
     echo %CHUNK% > config.jam
     more config.jam
