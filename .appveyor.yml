@@ -26,5 +26,7 @@ build: off
 test_script:
   - set PATH=%ADDPATH%%PATH%
   - |-
+    set VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%
+    set "CHUNK=^<include^>%VCPKG%\include ^<search^>%VCPKG%\lib"
     echo hello world > config.jam
     more config.jam
