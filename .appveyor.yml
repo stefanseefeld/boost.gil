@@ -29,3 +29,5 @@ test_script:
   - set I=%VCPKG%\include
   - set L=%VCPKG%\lib
   - echo include=%I% library-path=%L%
+  - cmd: call %APPVEYOR_BUILD_FOLDER%\generate-config.cmd > config.jam
+  - more config.jam
