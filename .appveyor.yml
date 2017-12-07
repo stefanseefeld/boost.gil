@@ -25,7 +25,7 @@ build: off
 
 test_script:
   - set PATH=%ADDPATH%%PATH%
-  - set VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%
+  - set "VCPKG=%APPVEYOR_BUILD_FOLDER%\..\vcpkg\installed\%TRIPLET%"
   - set I=%VCPKG%\include
   - set L=%VCPKG%\lib
   - echo include=%I% library-path=%L%
