@@ -16,7 +16,7 @@ environment:
       ARCH: x86
 
 install:
-  - if %ARCH% == x86 ( set TRIPLET=x86-windows ) else ( set TRIPLET=x64-windows )
+  - if %ARCH% == x86 ( set "TRIPLET=x86-windows" ) else ( set "TRIPLET=x64-windows" )
   - if %ARCH% == x86 ( set AM=32 ) else ( set AM=64 )
   - git clone -b master --depth 1 https://github.com/boostorg/boost.git boost-root
   - cd boost-root
