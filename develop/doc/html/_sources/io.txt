@@ -1,5 +1,5 @@
-Generic Image Library IO extensions
-===================================
+IO extensions
+=============
 
 :authors:
    Christian Henning
@@ -20,27 +20,25 @@ Generic Image Library IO extensions
         [@http://www.boost.org/LICENSE_1_0.txt])
     ]
 
-[/ Links ]
-[def _BMP_Wiki_            [@http://en.wikipedia.org/wiki/BMP_file_format]]
-[def _JPEG_Wiki_           [@http://en.wikipedia.org/wiki/JPEG]]
-[def _JPEG_lib_            [@http://www.ijg.org/]]
-[def _PNG_Wiki_            [@http://en.wikipedia.org/wiki/Portable_Network_Graphics]]
-[def _PNG_Lib_             [@http://libpng.org/pub/png/libpng.html]]
-[def _PNM_Wiki_            [@http://en.wikipedia.org/wiki/Portable_anymap]]
-[def _RAW_Wiki_            [@http://en.wikipedia.org/wiki/Raw_image_format]]
-[def _TARGA_Wiki           [@http://en.wikipedia.org/wiki/Truevision_TGA]]
-[def _RAW_lib_             [@http://www.libraw.org/]]
-[def _RAW_Wiki_            [@http://en.wikipedia.org/wiki/Raw_image_format]]
-[def _TIFF_Wiki_           [@http://en.wikipedia.org/wiki/Tagged_Image_File_Format]]
-[def _TIFF_Lib_            [@http://www.remotesensing.org/libtiff/]]
-[def _TIFF_Base_Tags_      [@http://www.awaresystems.be/imaging/tiff/tifftags/baseline.html]]
-[def _TIFF_Extension_Tags_ [@http://www.awaresystems.be/imaging/tiff/tifftags/extension.html]]
-
-[def _BMP_TEST_FILES                    [@http://entropymine.com/jason/bmpsuite/]]
-[def _PNG_TEST_FILES                    [@http://www.schaik.com/pngsuite/pngsuite.html]]
-[def _TARGA_TEST_FILES                  [@http://www.fileformat.info/format/tga/sample/index.htm]]
-[def _TIFF_LIB_TIFF_TEST_FILES          [@http://www.remotesensing.org/libtiff/images.html]]
-[def _TIFF_GRAPHICSMAGICK_TEST_FILES    [@ftp://ftp.graphicsmagick.org/pub/tiff-samples/tiff-sample-images-be.tar.gz]]
+.. _BMP_Wiki: http://en.wikipedia.org/wiki/BMP_file_format
+.. _JPEG_Wiki: http://en.wikipedia.org/wiki/JPEG
+.. _JPEG_lib: http://www.ijg.org/
+.. _PNG_Wiki: http://en.wikipedia.org/wiki/Portable_Network_Graphics
+.. _PNG_Lib: http://libpng.org/pub/png/libpng.html
+.. _PNM_Wiki: http://en.wikipedia.org/wiki/Portable_anymap
+.. _RAW_Wiki: http://en.wikipedia.org/wiki/Raw_image_format
+.. _TARGA_Wiki: http://en.wikipedia.org/wiki/Truevision_TGA
+.. _RAW_lib: http://www.libraw.org/
+.. _RAW_Wiki: http://en.wikipedia.org/wiki/Raw_image_format
+.. _TIFF_Wiki: http://en.wikipedia.org/wiki/Tagged_Image_File_Format
+.. _TIFF_Lib: http://www.remotesensing.org/libtiff/
+.. _TIFF_Base_Tags: http://www.awaresystems.be/imaging/tiff/tifftags/baseline.html
+.. _TIFF_Extension_Tags: http://www.awaresystems.be/imaging/tiff/tifftags/extension.html
+.. _BMP_TEST_FILES: http://entropymine.com/jason/bmpsuite/
+.. _PNG_TEST_FILES: http://www.schaik.com/pngsuite/pngsuite.html
+.. _TARGA_TEST_FILES: http://www.fileformat.info/format/tga/sample/index.htm
+.. _TIFF_LIB_TIFF_TEST_FILES: http://www.remotesensing.org/libtiff/images.html
+.. _TIFF_GRAPHICSMAGICK_TEST_FILES: ftp://ftp.graphicsmagick.org/pub/tiff-samples/tiff-sample-images-be.tar.gz
 
 Overview
 --------
@@ -92,8 +90,10 @@ wants to write jpeg's include jpeg_write.hpp. All formats provide these three ty
 
 xxx stands for image format.
 
-[h2 Reading An Image]
-Probably the most common case to read a tiff image can be done as follows:
+Reading An Image
+~~~~~~~~~~~~~~~~
+
+Probably the most common case to read a tiff image can be done as follows::
 
     std::string filename( "image.tif" );
     rgb8_image_t img;
@@ -109,7 +109,7 @@ memory needed for the read operation. There are read_view or read_and_convert_vi
 counterparts, if the memory is already allocated.
 
 Sometimes the user only wants to read a sub-part of an image, then the above call
-would look as follows:
+would look as follows::
 
     read_image( filename
               , img
@@ -120,10 +120,12 @@ The image_read_settings class will provide the user with image format independen
 reading setting but can also serves as a pointer for format dependent settings. Please
 see the specific image format sections [link gil.io.using_io.supported_image_formats Supported Image Formats] for more details.
 
-[h2 Writing An Image]
+Writing An Image
+~~~~~~~~~~~~~~~~
+
 Besides reading the information also writing is the second part of this boost::gil extension.
 Writing is a lot simpler than reading since an existing image view contains all the information.
-For instance writing an image can be done as follows:
+For instance writing an image can be done as follows::
 
     std::string filename( "image.tif" );
     rgb8_image_t img( 640, 480 );
@@ -137,7 +139,7 @@ For instance writing an image can be done as follows:
 
 
 The interface is similar to reading an image. To add image format specific parameter the user can use
-image_write_info class. For instance, a user can specify the jpeg quality when writing like this:
+image_write_info class. For instance, a user can specify the jpeg quality when writing like this::
 
     std::string filename( "image.jpg" );
     rgb8_image_t img( 640, 480 );
@@ -152,8 +154,10 @@ image_write_info class. For instance, a user can specify the jpeg quality when w
 
 The above example will write an image where the jpeg quality is set to 95 percent.
 
-[h2 Reading And Writing In-Memory Buffers]
-Reading and writing in-memory buffers are supported as well. See as follows:
+Reading And Writing In-Memory Buffers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Reading and writing in-memory buffers are supported as well. See as follows::
 
     // 1. Read an image.
     ifstream in( "test.tif", ios::binary );
@@ -186,14 +190,16 @@ write, seek, close, etc. Interface.
 Using IO
 --------
 
-[h2 General Overview]
+General Overview
+~~~~~~~~~~~~~~~~
+
 The tutorial pointed out some use cases for reading and writing images in various image formats. This section will provide a more thorough overview.
 
 The next sections will introduce the Read and Write interface. But it might be worth poiting out that by using some advanced metaprogramming techniques
 the interface is rather small and hopefully easy to understand.
 
 Besides the general interface the user also has the ability to interface directly with the underlying image format. For that each reader or writer 
-provides access to the so-called backend. For instance:
+provides access to the so-called backend. For instance::
 
     typedef get_reader_backend< const std::string
                               , tag_t
@@ -208,15 +214,17 @@ provides access to the so-called backend. For instance:
 
 Of course, the typedef can be removed when using c++11's auto feature.
 
-[h2 Read Interface]
+Read Interface
+~~~~~~~~~~~~~~
+
 As the Tutorial demonstrated there are a few ways to read images. Here is an enumeration of 
 all read functions with a short description:
 
-    * read_image - read into a gil image with no conversion. Memory is allocated.
-    * read_view  - read into a gil view with no conversion.
-    * read_and_convert_image - read and convert into a gil image. Memory is allocated.
-    * read_and_convert_view  - read and convert into a gil view.
-    * read_image_info - read the image header.
+* read_image - read into a gil image with no conversion. Memory is allocated.
+* read_view  - read into a gil view with no conversion.
+* read_and_convert_image - read and convert into a gil image. Memory is allocated.
+* read_and_convert_view  - read and convert into a gil view.
+* read_image_info - read the image header.
 
 Conversion in this context is necessary if the source ( file ) has an incompatible color space
 with the destination ( gil image type ). If that's the case the user has to use the xxx_and_convert_xxx
@@ -232,7 +240,7 @@ The third and last parameter is either an instance of the image_read_settings<Fo
 FormatTag. The settings can be various depending on the format which is being read. But the all
 share settings for reading a partial image area. The first point describes the top left image
 coordinate whereas the second are the dimensions in x and y directions. Here an example of
-setting up partial read.
+setting up partial read::
 
     read_image( filename
               , img
@@ -240,7 +248,7 @@ setting up partial read.
               );
 
 Each format supports reading just the header information, using read_image_info(). Please
-refer to the format specific sections under 3.3. A basic example follows:
+refer to the format specific sections under 3.3. A basic example follows::
 
     image_read_info< tiff_t > info = read_image_info( filename
                                                     , tiff_t()
@@ -248,7 +256,7 @@ refer to the format specific sections under 3.3. A basic example follows:
 
 GIL also comes with a dynamic image extension. In the context of GIL.IO a user can define an any_image type based
 on several image types. The IO extension would then pick the matching image type to the current image file.
-The following example shows this feature:
+The following example shows this feature::
 
     typedef mpl::vector< gray8_image_t
                        , gray16_image_t
@@ -266,7 +274,7 @@ The following example shows this feature:
 
 During the review it became clear that there is a need to read big images scanline by scanline. To support such use case 
 a scanline_reader is implemented for all supported image formats. The scanline_read_iterators will then allow to traverse 
-through the image. The following code sample shows the usage:
+through the image. The following code sample shows the usage::
 
     typedef tiff_tag tag_t;
 
@@ -307,7 +315,9 @@ through the image. The following code sample shows the usage:
 There are many ways to travese an image but for as of now only by scanline is supported.
 
 
-[h2 Write Interface]
+Write Interface
+~~~~~~~~~~~~~~~
+
 There is only one function for writing out images, write_view. Similar to reading the first parameter is either
 a filename or a device. The filename can be anything from a c string, std::string, std::wstring, and a 
 boost::filesystem path. When using the path object the user needs to define the ADD_FS_PATH_SUPPORT compiler symbol 
@@ -317,7 +327,7 @@ The second parameter is an view object to image being written. The third and las
 an image_write_info< FormatTag > object containing more settings. One example for instance is the jpeg quality. 
 Refer to the format specific sections under 3.3. to have a list of all the possible settings.
 
-Writing an any_image<...> is supported. See the following example:
+Writing an any_image<...> is supported. See the following example::
 
     typedef mpl::vector< gray8_image_t
                        , gray16_image_t
@@ -335,37 +345,44 @@ Writing an any_image<...> is supported. See the following example:
               , tiff_tag()
               );
 
-[h2 Compiler Symbols]
+Compiler Symbols
+~~~~~~~~~~~~~~~~
 
 The following table gives an overview of all supported compiler symbols that can be set by the user:
 
-[table Compiler Symbols
-    [[Symbol]                                                   [Description]]
-    [[BOOST_GIL_IO_ENABLE_GRAY_ALPHA]                           [Enable the color space "gray_alpha".]]
-    [[BOOST_GIL_IO_ADD_FS_PATH_SUPPORT]                         [Enable boost::filesystem 3.0 library.]]
-    [[BOOST_GIL_IO_PNG_FLOATING_POINT_SUPPORTED]                [Use libpng in floating point mode. This symbol is incompatible with BOOST_GIL_IO_PNG_FIXED_POINT_SUPPORTED.]]
-    [[BOOST_GIL_IO_PNG_FIXED_POINT_SUPPORTED]                   [Use libpng in integer mode. This symbol is incompatible with BOOST_GIL_IO_PNG_FLOATING_POINT_SUPPORTED.]]
-    [[BOOST_GIL_IO_PNG_DITHERING_SUPPORTED]                     [Look up "dithering" in libpng manual for explanation.]]
-    [[BOOST_GIL_IO_PNG_1_4_OR_LOWER]                            [Allow compiling with libpng 1.4 or lower.]]
-    [[BOOST_GIL_EXTENSION_IO_JPEG_C_LIB_COMPILED_AS_CPLUSPLUS]  [libjpeg is compiled as c++ lib.]]
-    [[BOOST_GIL_EXTENSION_IO_PNG_C_LIB_COMPILED_AS_CPLUSPLUS]   [libpng is compiled as c++ lib.]]
-    [[BOOST_GIL_EXTENSION_IO_RAW_C_LIB_COMPILED_AS_CPLUSPLUS]   [libraw is compiled as c++ lib.]]
-    [[BOOST_GIL_EXTENSION_IO_TIFF_C_LIB_COMPILED_AS_CPLUSPLUS]  [libtiff is compiled as c++ lib.]]
-    [[BOOST_GIL_EXTENSION_IO_ZLIB_C_LIB_COMPILED_AS_CPLUSPLUS]  [zlib is compiled as c++ lib.]]
-    [[BOOST_GIL_IO_TEST_ALLOW_READING_IMAGES]                   [Allow basic test images to be read from local hard drive. The paths can be set in paths.hpp]]
-    [[BOOST_GIL_IO_TEST_ALLOW_WRITING_IMAGES]                   [Allow images to be written to the local hard drive. The paths can be set in paths.hpp]]
-    [[BOOST_GIL_IO_USE_BMP_TEST_SUITE_IMAGES]                   [Run tests using the bmp test images suite. See _BMP_TEST_FILES]]
-    [[BOOST_GIL_IO_USE_PNG_TEST_SUITE_IMAGES]                   [Run tests using the png test images suite. See _PNG_TEST_FILES]]
-    [[BOOST_GIL_IO_USE_PNM_TEST_SUITE_IMAGES]                   [Run tests using the pnm test images suite. Send me an email for accessing the files.]]
-    [[BOOST_GIL_IO_USE_TARGA_FILEFORMAT_TEST_SUITE_IMAGES]      [Run tests using the targa file format test images suite. See _TARGA_TEST_FILES]]
-    [[BOOST_GIL_IO_USE_TIFF_LIBTIFF_TEST_SUITE_IMAGES]          [Run tests using the targa file format test images suite. See _TIFF_LIB_TIFF_TEST_FILES]]
-    [[BOOST_GIL_IO_USE_TIFF_GRAPHICSMAGICK_TEST_SUITE_IMAGES]   [Run tests using the targa file format test images suite. See _TIFF_GRAPHICSMAGICK_TEST_FILES]]
+.. comment [table Compiler Symbols
 
-]
+======================================================== ========================================================
+   Symbol                                                   Description
+======================================================== ========================================================
+BOOST_GIL_IO_ENABLE_GRAY_ALPHA                           Enable the color space "gray_alpha".
+BOOST_GIL_IO_ADD_FS_PATH_SUPPORT                         Enable boost::filesystem 3.0 library.
+BOOST_GIL_IO_PNG_FLOATING_POINT_SUPPORTED                Use libpng in floating point mode. This symbol is incompatible with BOOST_GIL_IO_PNG_FIXED_POINT_SUPPORTED.
+BOOST_GIL_IO_PNG_FIXED_POINT_SUPPORTED                   Use libpng in integer mode. This symbol is incompatible with BOOST_GIL_IO_PNG_FLOATING_POINT_SUPPORTED.
+BOOST_GIL_IO_PNG_DITHERING_SUPPORTED                     Look up "dithering" in libpng manual for explanation.
+BOOST_GIL_IO_PNG_1_4_OR_LOWER                            Allow compiling with libpng 1.4 or lower.
+BOOST_GIL_EXTENSION_IO_JPEG_C_LIB_COMPILED_AS_CPLUSPLUS  libjpeg is compiled as c++ lib.
+BOOST_GIL_EXTENSION_IO_PNG_C_LIB_COMPILED_AS_CPLUSPLUS   libpng is compiled as c++ lib.
+BOOST_GIL_EXTENSION_IO_RAW_C_LIB_COMPILED_AS_CPLUSPLUS   libraw is compiled as c++ lib.
+BOOST_GIL_EXTENSION_IO_TIFF_C_LIB_COMPILED_AS_CPLUSPLUS  libtiff is compiled as c++ lib.
+BOOST_GIL_EXTENSION_IO_ZLIB_C_LIB_COMPILED_AS_CPLUSPLUS  zlib is compiled as c++ lib.
+BOOST_GIL_IO_TEST_ALLOW_READING_IMAGES                   Allow basic test images to be read from local hard drive. The paths can be set in paths.hpp
+BOOST_GIL_IO_TEST_ALLOW_WRITING_IMAGES                   Allow images to be written to the local hard drive. The paths can be set in paths.hpp
+BOOST_GIL_IO_USE_BMP_TEST_SUITE_IMAGES                   Run tests using the bmp test images suite. See _BMP_TEST_FILES
+BOOST_GIL_IO_USE_PNG_TEST_SUITE_IMAGES                   Run tests using the png test images suite. See _PNG_TEST_FILES
+BOOST_GIL_IO_USE_PNM_TEST_SUITE_IMAGES                   Run tests using the pnm test images suite. Send me an email for accessing the files.
+BOOST_GIL_IO_USE_TARGA_FILEFORMAT_TEST_SUITE_IMAGES      Run tests using the targa file format test images suite. See _TARGA_TEST_FILES
+BOOST_GIL_IO_USE_TIFF_LIBTIFF_TEST_SUITE_IMAGES          Run tests using the targa file format test images suite. See _TIFF_LIB_TIFF_TEST_FILES
+BOOST_GIL_IO_USE_TIFF_GRAPHICSMAGICK_TEST_SUITE_IMAGES   Run tests using the targa file format test images suite. See _TIFF_GRAPHICSMAGICK_TEST_FILES
+======================================================== ========================================================
 
-[h2 Supported Image Formats]
-[h3 BMP]
-For a general overview of the BMP image file format go to the following _BMP_Wiki_.
+Supported Image Formats
+~~~~~~~~~~~~~~~~~~~~~~~
+
+BMP
++++
+
+For a general overview of the BMP image file format go to the following BMP_Wiki_.
 
 Please note, the code has not been tested on X Windows System variations
 of the BMP format which are usually referred to XBM and XPM formats.
@@ -374,16 +391,18 @@ Here, only the MS Windows and OS/2 format is relevant.
 
 Currently the code is able to read and write the following image types:
 
-Read: gray1_image_t, gray4_image_t, gray8_image_t, rgb8_image_t and, rgba8_image_t
-Write: rgb8_image_t and, rgba8_image_t
+:Read: ``gray1_image_t``, ``gray4_image_t``, ``gray8_image_t``, ``rgb8_image_t`` and, ``rgba8_image_t``
+:Write: ``rgb8_image_t`` and, ``rgba8_image_t``
 
 The lack of having an indexed image type in gil restricts the current interface to only
 write out non-indexed images. This is subject to change soon.
 
-[h3 JPEG]
-For a general overview of the JPEG image file format go to the following _JPEG_Wiki_. 
+JPEG
+++++
 
-This jpeg extension is based on the libjpeg library which can be found here, _JPEG_Lib_. 
+For a general overview of the JPEG image file format go to the following JPEG_Wiki_. 
+
+This jpeg extension is based on the libjpeg library which can be found here, JPEG_Lib_. 
 
 All versions starting from 8x are supported.
 
@@ -392,17 +411,19 @@ to build the library yourself. It could potentially save you a lot of trouble.
 
 Currently the code is able to read and write the following image types:
 
-Read: gray8_image_t, rgb8_image_t, cmyk8_image_t
-Write: gray8_image_t, rgb8_image_t, cmyk8_image_t
+:Read: ``gray8_image_t``, ``rgb8_image_t``, ``cmyk8_image_t``
+:Write: ``gray8_image_t``, ``rgb8_image_t``, ``cmyk8_image_t``
 
 Reading YCbCr or YCCK images is possible but might result in inaccuracies since both color spaces
 aren't available yet for gil. For now these color space are read as rgb images.
 This is subject to change soon.
 
-[h3 PNG]
-For a general overview of the PNG image file format go to the following _PNG_Wiki_.
+PNG
++++
 
-This png extension is based on the libpng, which can be found here, _PNG_Lib.
+For a general overview of the PNG image file format go to the following PNG_Wiki_.
+
+This png extension is based on the libpng, which can be found here, PNG_Lib_.
 
 All versions starting from 1.5.x are supported.
 
@@ -411,44 +432,52 @@ to build the library yourself. It could potentially save you a lot of trouble.
 
 Currently the code is able to read and write the following image types:
 
-Read: gray1, gray2, gray4, gray8, gray16, gray_alpha_8, gray_alpha_16, rgb8, rgb16, rgba8, rgba16
-Write: gray1, gray2, gray4, gray8, gray16, gray_alpha_8, gray_alpha_16, rgb8, rgb16, rgba8, rgba16
+:Read: gray1, gray2, gray4, gray8, gray16, gray_alpha_8, gray_alpha_16, rgb8, rgb16, rgba8, rgba16
+:Write: gray1, gray2, gray4, gray8, gray16, gray_alpha_8, gray_alpha_16, rgb8, rgb16, rgba8, rgba16
 
 For reading gray_alpha images the user has to enable the ENABLE_GRAY_ALPHA compiler switch. This color
 space is defined in the toolbox by using gray_alpha.hpp.
 
-[h3 PNM]
-For a general overview of the PNM image file format go to the following _PNM_Wiki_.
+PNM
++++
+
+For a general overview of the PNM image file format go to the following PNM_Wiki_.
 
 No external library is needed for the pnm format. Both ascii and binary formats are supported.
 
 Currently the code is able to read and write the following image types:
 
-Read: gray1, gray8, rgb8
-Write: gray1, gray8, rgb8
+:Read: gray1, gray8, rgb8
+:Write: gray1, gray8, rgb8
 
 When reading a mono text image the data is read as a gray8 image.
 
-[h3 RAW]
-For a general overview see _RAW_Wiki.
+RAW
++++
+
+For a general overview see RAW_Wiki_.
 
 Currently the extension is only able to read rgb8 images.
 
-[h3 TARGA]
-For a general overview of the BMP image file format go to the following _TARGA_Wiki_.
+TARGA
++++++
+
+For a general overview of the BMP image file format go to the following TARGA_Wiki_.
 
 Currently the code is able to read and write the following image types:
 
-Read: rgb8_image_t and rgba8_image_t
-Write: rgb8_image_t and rgba8_image_t
+:Read: rgb8_image_t and rgba8_image_t
+:Write: rgb8_image_t and rgba8_image_t
 
 The lack of having an indexed image type in gil restricts the current interface to only
 write out non-indexed images. This is subject to change soon.
 
-[h3 TIFF]
-For a general overview of the TIFF image file format go to the following _TIFF_Wiki_.
+TIFF
+++++
 
-This tiff extension is based on the libtiff, which can be found, _TIFF_Lib_.
+For a general overview of the TIFF image file format go to the following TIFF_Wiki_.
+
+This tiff extension is based on the libtiff, which can be found, TIFF_Lib_.
 
 All versions starting from 3.9.x are supported.
 
@@ -459,8 +488,8 @@ TIFF images can virtually encode all kinds of channel sizes representing various
 planar images are possible. For instance, rbg323 or gray7. The channels also can have specific formats, like
 integer values or floating point values. For a complete set of options please consult the following websites:
 
-* _TIFF_Base_Tags_
-* _TIFF_Extension_Tags_
+* TIFF_Base_Tags_
+* TIFF_Extension_Tags_
 
 The author of this extension is not claiming all tiff formats are supported. This extension is
 likely to be a moving target adding new features with each new milestone. Here is an incomplete lists:
@@ -477,7 +506,9 @@ This gil extension uses two different test image suites to test read and write c
 It's advisable to use ImageMagick's test viewer to display images.
 
 
-[h2 Extending GIL::IO with new Formats]
+Extending GIL::IO with new Formats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Extending the gil::io with new formats is meant to be simple and straightforward. Before adding I would
 recommend to have a look at existing implementations and then trying to follow a couple of guidelines:
 
@@ -486,26 +517,23 @@ recommend to have a look at existing implementations and then trying to follow a
 	* xxx_write.hpp // Only includes write code
 	* xxx_all.hpp // includes xxx_read.hpp and xxx_write.hpp
 * Add the code to the boost::gil::detail namespace
-* Create a tag type for the new format. Like this:
-  ``
-		struct xxx_tag : format_tag {};
-  ``
+* Create a tag type for the new format. Like this::
+
+    struct xxx_tag : format_tag {};
 
 * Create the image_read_info for the new format. It contains all the information that are
   necessary to read an image. It should be filled and returned by the get_info() member of
-  the reader class. See below.
-  ``
-	  template<> struct image_read_info< xxx_tag > {};
-  ``
+  the reader class. See below::
+
+    template<> struct image_read_info< xxx_tag > {};
 
 * Create the image_write_info for the new format. It contains all the information that are
-  necessary to write an image.
-  ``
-	  template<> struct image_write_info< xxx_tag > {};
-  ``
+  necessary to write an image::
 
-* Use the following reader skeleton as a start:
-  ``
+    template<> struct image_write_info< xxx_tag > {};
+
+* Use the following reader skeleton as a start::
+
     template< typename Device
             , typename ConversionPolicy
             >
@@ -547,10 +575,9 @@ recommend to have a look at existing implementations and then trying to follow a
             // your implementation here
         }
     };
-  `` 
 
-* The writer skeleton:
-  ``    
+* The writer skeleton::
+
     template< typename Device >
     class writer< Device
                 , xxx_tag
@@ -575,7 +602,6 @@ recommend to have a look at existing implementations and then trying to follow a
             // your implementation here
         }
     };
-  ``
 
 Running gil::io tests
 ---------------------
@@ -586,9 +612,9 @@ There are some test images created by me in the test folder. To enable unit test
 
 The following list provides all links to the image suites the compiler symbol to enable the tests:
 
-* BMP:   _BMP_TEST_FILES                 -- BOOST_GIL_IO_USE_BMP_TEST_SUITE_IMAGES
-* PNG:   _PNG_TEST_FILES                 -- BOOST_GIL_IO_USE_PNG_TEST_SUITE_IMAGES
-* PNM:   request files from me           -- BOOST_GIL_IO_USE_PNM_TEST_SUITE_IMAGES
-* TARGA: _TARGA_TEST_FILES               -- BOOST_GIL_IO_USE_TARGA_FILEFORMAT_TEST_SUITE_IMAGES
-* TIFF:  _TIFF_LIB_TIFF_TEST_FILES       -- BOOST_GIL_IO_USE_TIFF_LIBTIFF_TEST_SUITE_IMAGES
-* TIFF   _TIFF_GRAPHICSMAGICK_TEST_FILES -- BOOST_GIL_IO_USE_TIFF_GRAPHICSMAGICK_TEST_SUITE_IMAGES
+:BMP:   BMP_TEST_FILES_                 -- BOOST_GIL_IO_USE_BMP_TEST_SUITE_IMAGES
+:PNG:   PNG_TEST_FILES_                 -- BOOST_GIL_IO_USE_PNG_TEST_SUITE_IMAGES
+:PNM:   request files from me           -- BOOST_GIL_IO_USE_PNM_TEST_SUITE_IMAGES
+:TARGA: TARGA_TEST_FILES_               -- BOOST_GIL_IO_USE_TARGA_FILEFORMAT_TEST_SUITE_IMAGES
+:TIFF:  TIFF_LIB_TIFF_TEST_FILES_       -- BOOST_GIL_IO_USE_TIFF_LIBTIFF_TEST_SUITE_IMAGES
+:TIFF:  TIFF_GRAPHICSMAGICK_TEST_FILES_ -- BOOST_GIL_IO_USE_TIFF_GRAPHICSMAGICK_TEST_SUITE_IMAGES

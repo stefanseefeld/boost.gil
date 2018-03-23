@@ -12,10 +12,10 @@ Overview
 Images are essential in any image processing, vision and video project, and yet the variability in image representations makes it difficult 
 to write imaging algorithms that are both generic and efficient. In this section we will describe some of the challenges that we would like to address.
 
-In the following discussion an <i>image</i> is a 2D array of pixels. A <i>pixel</i> is a set of color channels that represents the color at a given point in an image. Each
-<i>channel</i> represents the value of a color component.
-There are two common memory structures for an image. <i>Interleaved</i> images are represented by grouping the pixels together in memory and 
-interleaving all channels together, whereas <i>planar</i> images keep the channels in separate color planes. Here is a 4x3 RGB image in 
+In the following discussion an *image* is a 2D array of pixels. A *pixel* is a set of color channels that represents the color at a given point in an image. Each
+*channel* represents the value of a color component.
+There are two common memory structures for an image. *Interleaved* images are represented by grouping the pixels together in memory and 
+interleaving all channels together, whereas *planar* images keep the channels in separate color planes. Here is a 4x3 RGB image in 
 which the second pixel of the first row is marked in red, in interleaved form:
 
 .. image:: interleaved.jpg
@@ -178,14 +178,14 @@ are defined in ``channel_traits`` with the following default implementation::
     static value_type max_value() { return std::numeric_limits<T>::max(); }
   };
 
-Two channel types are <i>compatible</i> if they have the same value type:: 
+Two channel types are *compatible* if they have the same value type:: 
 
   concept ChannelsCompatibleConcept<ChannelConcept T1, ChannelConcept T2>
   {
     where SameType<T1::value_type, T2::value_type>;
   };
 
-A channel may be <i>convertible</i> to another channel::
+A channel may be *convertible* to another channel::
 
   template <ChannelConcept Src, ChannelValueConcept Dst>
   concept ChannelConvertibleConcept
@@ -307,7 +307,7 @@ Color Space and Layout
 
 
 A color space captures the set and interpretation of channels comprising a pixel. It is an MPL random access sequence containing the types 
-of all elements in the color space. Two color spaces are considered <i>compatible</i> if they are equal (i.e. have the same set of colors in the same order).
+of all elements in the color space. Two color spaces are considered *compatible* if they are equal (i.e. have the same set of colors in the same order).
 
 <b>Related Concepts:</b>
 
@@ -433,7 +433,7 @@ Models of ``ColorBaseConcept`` are required to provide the ``at_c<K>(ColorBase)`
 physical order. GIL provides a ``semantic_at_c<K>(ColorBase)`` function (described later) which can operate on any model of ColorBaseConcept and returns
 the corresponding semantic element.
 
-Two color bases are <i>compatible</i> if they have the same color space and their elements (paired semantically) are convertible to each other.
+Two color bases are *compatible* if they have the same color space and their elements (paired semantically) are convertible to each other.
 
 
 <b>Models:</b>
@@ -560,9 +560,9 @@ Pixel
 
 A pixel is a set of channels defining the color at a given point in an image. Conceptually, a pixel is little more than a color base whose elements 
 model ``ChannelConcept``.
-All properties of pixels inherit from color bases: pixels may be <i>homogeneous</i> if all of their channels have the same type; otherwise they are 
-called <i>heterogeneous</i>. The channels of a pixel may be addressed using semantic or physical indexing, or by color; all color-base algorithms 
-work on pixels as well. Two pixels are <i>compatible</i> if their color spaces are the same and their channels, paired semantically, are compatible. 
+All properties of pixels inherit from color bases: pixels may be *homogeneous* if all of their channels have the same type; otherwise they are 
+called *heterogeneous*. The channels of a pixel may be addressed using semantic or physical indexing, or by color; all color-base algorithms 
+work on pixels as well. Two pixels are *compatible* if their color spaces are the same and their channels, paired semantically, are compatible. 
 Note that constness, memory organization and reference/value are ignored. For example, an 8-bit RGB planar reference is compatible to a constant 8-bit 
 BGR interleaved pixel value. Most pairwise pixel operations (copy construction, assignment, equality, etc.) are only defined for compatible pixels.
 
@@ -636,7 +636,7 @@ Pixels model the following concepts::
     //    ChannelsCompatibleConcept<kth_semantic_element_type<P1,K>::type, kth_semantic_element_type<P2,K>::type>;
   };
 
-A pixel is <i>convertible</i> to a second pixel if it is possible to approximate its color in the form of the second pixel. Conversion is an explicit,
+A pixel is *convertible* to a second pixel if it is possible to approximate its color in the form of the second pixel. Conversion is an explicit,
 non-symmetric and often lossy operation (due to both channel and color space approximation). Convertability requires modeling the following concept::
 
   template <PixelConcept SrcPixel, MutablePixelConcept DstPixel>
@@ -1889,11 +1889,12 @@ They follow this pattern:
 
 *ColorSpace* + *BitDepth* + ["s|f"] + ["c"] + ["_planar"] + ["_step"] + *ClassType* + "_t"
 
-Where *ColorSpace* also indicates the ordering of components. Examples are ``rgb``, ``bgr``, ``cmyk``, ``rgba``. *BitDepth* can be, for example,
- ``8``,``16``,``32``. By default the bits are unsigned integral type. Append ``s`` to the bit depth to indicate signed integral, or ``f`` to indicate 
- floating point. ``c`` indicates object whose associated pixel reference is immutable. ``_planar`` indicates planar organization (as opposed to interleaved). 
-``_step`` indicates the type has a dynamic step and *ClassType* is ``_image`` (image, using a standard allocator), ``_view`` (image view), ``_loc`` 
-(pixel locator), ``_ptr`` (pixel iterator), ``_ref`` (pixel reference), ``_pixel`` (pixel value). Here are examples::
+where *ColorSpace* also indicates the ordering of components. Examples are ``rgb``, ``bgr``, ``cmyk``, ``rgba``. *BitDepth* can be,
+for example, ``8``,``16``,``32``. By default the bits are unsigned integral type. Append ``s`` to the bit depth to indicate signed
+integral, or ``f`` to indicate floating point. ``c`` indicates object whose associated pixel reference is immutable. ``_planar``
+indicates planar organization (as opposed to interleaved). ``_step`` indicates the type has a dynamic step and *ClassType* is ``_image``
+(image, using a standard allocator), ``_view`` (image view), ``_loc`` (pixel locator), ``_ptr`` (pixel iterator), ``_ref``
+(pixel reference), ``_pixel`` (pixel value). Here are examples::
 
   bgr8_image_t               i;     // 8-bit unsigned (unsigned char) interleaved BGR image
   cmyk16_pixel_t;            x;     // 16-bit unsigned (unsigned short) CMYK pixel value;
@@ -2046,7 +2047,7 @@ GIL also supports type analysis metafunctions of the form:
    ...
   }
 
-A <i>basic</i> GIL construct is a memory-based construct that uses the built-in GIL classes and does not have any function object to invoke upon dereferencing.
+A *basic* GIL construct is a memory-based construct that uses the built-in GIL classes and does not have any function object to invoke upon dereferencing.
 For example, a simple planar or interleaved, step or non-step RGB image view is basic, but a color converted view or a virtual view is not.
 
 I/O Extension
@@ -2350,7 +2351,7 @@ example, how to overload color conversion so that color conversion to gray inver
   // provide specializations only for cases you care about
   // (in this case, if the destination is grayscale, invert it)
   template <typename SrcColorSpace>
-  struct my_co lor_converter_impl<SrcColorSpace,gray_t>
+  struct my_color_converter_impl<SrcColorSpace,gray_t>
   {
     template <typename SrcP, typename DstP>  // Model PixelConcept
     void operator()(const SrcP& src, DstP& dst) const
